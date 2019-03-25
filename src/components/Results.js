@@ -4,9 +4,18 @@ import PropTypes from 'prop-types'
 
 function Results (props) {
     return (
-        <div>
-            {JSON.stringify(props.data)}
-        </div>
+        <ul>
+            {props.data.map((v,i) => (
+                <li key={i}>
+                    {v.source}
+                    <ul>
+                        {v.ids.map((v,i) => (
+                            <li key={i}>{v}</li>
+                        ))}
+                    </ul>
+                </li>
+            ))}
+        </ul>
     )
 }
 

@@ -1,9 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import {create} from 'react-test-renderer'
+
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from '../reducers'
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  const store = createStore(rootReducer)
+  const component = create(
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  )
+  const button = component.root.findByType('button')
+  expect(button.props.children).toBe('Search')
 });
