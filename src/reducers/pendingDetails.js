@@ -4,19 +4,19 @@ const detailedResults = (state = {}, action) => {
     const sourcestate = {}
     switch (action.type) {
         case actions.detail_request:
-            sourcestate[action.payload.source] = new Set(state[action.payload.source])
-            sourcestate[action.payload.source].add(action.payload.id)
+            var { source, id } = action.payload
+            var data = source in state ? state[source] : []
             return {
                 ...state,
-                ...sourcestate, 
+                [source]:[...data, id], 
             }
         case actions.detail_receive:
         case actions.detail_fail:
-            sourcestate[action.payload.source] = new Set(state[action.payload.source])
-            sourcestate[action.payload.source].delete(action.payload.id)
+            var { source, id } = action.payload
+            var data = source in state ? state[source] : []
             return {
                 ...state,
-                ...sourcestate, 
+                [source]:data.filter(x=>x!=id), 
             }
         default:
             return state
