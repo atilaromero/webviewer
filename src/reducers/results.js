@@ -1,8 +1,8 @@
-import { actions } from '../actions'
+import { result_set } from '../actions'
 
 const results = (state = [], action) => {
     switch (action.type) {
-        case actions.result_set:
+        case result_set.name:
             return action.payload.data
         default:
             return state

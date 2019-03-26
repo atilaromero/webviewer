@@ -1,5 +1,9 @@
 import pendingDetails from './pendingDetails'
-import actions from '../actions'
+import {
+    detail_request,
+    detail_receive,
+    detail_cancel,
+} from '../actions'
 
 it('results', () => {
     const x0 = {}
@@ -7,28 +11,20 @@ it('results', () => {
     const x2 = {A: [1,2] }
     const x3 = {A: [2] }
     const x4 = {A: [] }
-    expect(pendingDetails(x0, {
-        type: actions.detail_request,
-        payload: {source: "A", id: 1}
-    })).toEqual(
+    expect(pendingDetails(x0, detail_request({source: "A", id: 1}))
+    ).toEqual(
         x1
     )
-    expect(pendingDetails(x1, {
-        type: actions.detail_request,
-        payload: {source: "A", id: 2}
-    })).toEqual(
+    expect(pendingDetails(x1, detail_request({source: "A", id: 2}))
+    ).toEqual(
         x2
     )
-    expect(pendingDetails(x2, {
-        type: actions.detail_fail,
-        payload: {source: "A", id: 1}
-    })).toEqual(
+    expect(pendingDetails(x2, detail_cancel({source: "A", id: 1}))
+    ).toEqual(
         x3
     )
-    expect(pendingDetails(x3, {
-        type: actions.detail_receive,
-        payload: {source: "A", id: 2}
-    })).toEqual(
+    expect(pendingDetails(x3, detail_receive({source: "A", id: 2}))
+    ).toEqual(
         x4
     )
 })

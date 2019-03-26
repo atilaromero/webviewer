@@ -1,12 +1,16 @@
-import { actions } from '../actions'
+import { 
+    detail_request,
+    detail_receive,
+    detail_cancel,
+} from '../actions'
 
 const detailedResults = (state = [], action) => {
     switch (action.type) {
-        case actions.detail_request:
+        case detail_request.name:
             return state
-        case actions.detail_receive:
+        case detail_receive.name:
             return [...state, action.payload]
-        case actions.detail_fail:
+        case detail_cancel.name:
             return state
         default:
             return state

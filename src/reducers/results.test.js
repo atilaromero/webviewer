@@ -1,11 +1,17 @@
 import results from './results'
-import actions from '../actions'
+import {
+    result_set,
+} from '../actions'
 
 it('results', () => {
+    const x = [{source: "A", ids: [1,2,3]}]
     expect(results([], {
-        type: actions.result_set,
-        payload: {data: [{source: "A", ids: [1,2,3]}]}
-    })).toEqual(
-        [{source: "A", ids: [1,2,3]}]
-    )
+        type: result_set.name,
+        payload: {data: x}
+    })).toEqual(x)
+    expect(result_set(x)).toEqual({
+        type: result_set.name,
+        payload: x
+    })
+    expect(results([], result_set({data: x}))).toEqual(x)
 })
