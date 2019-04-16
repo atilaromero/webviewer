@@ -8,7 +8,12 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 
-const store = createStore(rootReducer)
+export const store = createStore(rootReducer);
+window.store = store;
+
+console.log("initial state: " + JSON.stringify(store.getState()));
+
+store.subscribe(() => console.log("new state: " + JSON.stringify(store.getState())));
 
 ReactDOM.render(
     <Provider store={store}>

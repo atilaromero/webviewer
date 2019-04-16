@@ -1,12 +1,16 @@
 import React from 'react';
-
+import Init from '../containers/Init'
 import Search from '../containers/Search';
-import Results from '../containers/Results'
+import Panel from '../containers/Panel';
+import Results from '../containers/Results';
+
 
 function App(){
   return (
     <div>
+      <Init/>
       <Search/>
+      <Panel/>
       <Results/>
     </div>
   );

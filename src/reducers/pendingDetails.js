@@ -9,6 +9,7 @@ const detailedResults = (state = {}, action) => {
     switch (action.type) {
         case detail_request.name:
             var { source, id } = action.payload
+            console.log("");
             var data = source in state ? state[source] : []
             return {
                 ...state,

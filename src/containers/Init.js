@@ -1,16 +1,16 @@
 import { connect } from 'react-redux'
-import Search from '../components/Search'
-import { searchDocument, getSources } from '../actions'
+import Init from '../components/Init'
+import { getSources } from '../actions'
 
 const mapStateToProps = state => ({
+//    sources: state.sources
 })
 
 const mapDispatchToProps = dispatch => ({
-    search: query => searchDocument(query)(dispatch),
     getsources: () => getSources()(dispatch),
 })
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Search)
+)(Init)
