@@ -3,6 +3,7 @@ import Init from '../containers/Init'
 import Search from '../containers/Search';
 import Panel from '../containers/Panel';
 import Results from '../containers/Results';
+import Doc from '../containers/Doc';
 
 
 function App(){
@@ -12,6 +13,7 @@ function App(){
       <Search/>
       <Panel/>
       <Results/>
+      <Doc/>
     </div>
   );
 }

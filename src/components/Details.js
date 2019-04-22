@@ -1,3 +1,33 @@
+import React from 'react';
+
+class Details extends React.Component{
+  
+  constructor(props){
+    super(props);
+
+  }
+
+  shouldComponentUpdate(){
+      return this.props.ready;
+  }
+
+  render(){
+    if (this.props.ready === false) {
+      return(null);
+    } else {
+      return(
+        this.props.details.map ((e,i) => (
+          <div>
+            <Doc source={e.details.source} id={e.details.id}/>
+          </div>
+        ))
+      )
+    }
+  }
+}
+
+export default Details;
+
 /*
 import React from 'react'
 

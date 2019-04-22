@@ -2,10 +2,12 @@ export const sources_set = payload => ({type:'sources_set', payload})
 
 export const result_set = payload => ({type:'result_set', payload})
 
+export const detail_conf = payload => ({type:'detail_conf', payload})
 export const detail_request = payload => ({type:'detail_request', payload})
 export const detail_receive = payload => ({type:'detail_receive', payload})
 export const detail_cancel = payload => ({type:'detail_cancel', payload})
 
+export const ready_set = payload => ({type:'ready_set', payload})
 
 export function getSources(){
     return function (dispatch) {
@@ -18,7 +20,27 @@ export function getSources(){
         })()
     }
 }
-  
+
+export function getDetails(conf = {}){
+    return function (dispatch) {
+        return (async () => {
+            console.log("getting details...");
+
+            return dispatch(detail_conf(conf));
+        })()
+    }
+}
+
+export function goReady(){
+    return function (dispatch) {
+        return ( () => {
+            console.log('going ready...')
+            const ready = true
+            return dispatch(ready_set(ready));
+        })()
+    }
+}
+
 export function searchDocument (query) {
     return function (dispatch) {
         return (async () => {
