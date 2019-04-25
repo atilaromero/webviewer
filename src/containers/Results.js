@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Results from '../components/Results'
-import { getDetails, goReady } from '../actions';
+import { getDetails, goReady, resetDetails } from '../actions';
 
 const mapStateToProps = state => ({
     data: state.results
@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   details: conf => getDetails(conf)(dispatch),
-  goready: () => goReady()(dispatch),
+  goready: (ready) => goReady(ready)(dispatch),
+  resetdetails: () => resetDetails()(dispatch),
 })
 
 export default connect(

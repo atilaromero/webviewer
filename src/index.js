@@ -11,9 +11,13 @@ import rootReducer from './reducers'
 export const store = createStore(rootReducer);
 window.store = store;
 
-console.log("initial state: " + JSON.stringify(store.getState()));
+console.log("initial state: ");
+console.log(store.getState());
 
-store.subscribe(() => console.log("new state: " + JSON.stringify(store.getState())));
+store.subscribe(() => {
+  console.log("new state: ");
+  console.log(store.getState());
+});
 
 ReactDOM.render(
     <Provider store={store}>

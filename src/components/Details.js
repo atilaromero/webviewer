@@ -7,9 +7,9 @@ class Details extends React.Component{
 
   }
 
-  shouldComponentUpdate(){
-      return this.props.ready;
-  }
+  //shouldComponentUpdate(){
+  //    return this.props.ready;
+  //}
 
   render(){
     if (this.props.ready === false) {

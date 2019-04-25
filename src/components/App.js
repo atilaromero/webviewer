@@ -13,7 +13,17 @@ function App(){
       <Search/>
       <Panel/>
       <Results/>
-      <Doc/>
+      <Doc order='0'/>
+      <Doc order='1'/>
+      <Doc order='2'/>
+      <Doc order='3'/>
+      <Doc order='4'/>
+      <Doc order='5'/>
+      <Doc order='6'/>
+      <Doc order='7'/>
+      <Doc order='8'/>
+      <Doc order='9'/>
+      <Doc order='10'/>
     </div>
   );
 }

@@ -7,6 +7,8 @@ function Search(props) {
 //    props.getsources()
 
     return (<div>
+        <hr/>
+        <center>
         <input
             type="text"
             value={query}
@@ -14,6 +16,8 @@ function Search(props) {
         <button 
             type="button"
             onClick={() => props.search(query)}>Search</button>
+        </center>
+        <hr/>
     </div>)
 }
 Search.propTypes = {
