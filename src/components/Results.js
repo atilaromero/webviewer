@@ -60,21 +60,6 @@ function Results (props) {
                                       props.goready(true)
                                       return responses
                                   })
-
-                                /*fetch(`http://localhost:8080/sources/${v.source}/docs/${v.ids[0]}`)
-                                    .then(result => result.json())
-                                    .then(result => {
-                                        //console.log(`sources/${v.source}/docs/${v.ids[0]}: `)
-                                        const doc = {
-                                        'details':result,
-                                        'text':'',
-                                        'content':'',
-                                        }
-                                        return doc
-                                        //props.details(doc)
-                                        //props.goready()
-                                        //console.log(doc)
-                                    })*/
                             }
                     }}>Details</button>
                 </li>
