@@ -3,7 +3,8 @@ import Results from '../components/Results'
 import { getDetails, goReady, resetDetails } from '../actions';
 
 const mapStateToProps = state => ({
-    data: state.results
+    data: state.results,
+    pageconf: state.pageconf,
   })
 
 const mapDispatchToProps = (dispatch) => ({

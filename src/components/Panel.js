@@ -16,6 +16,7 @@ function Panel(props) {
                 ))}
     
             </ul>
+            <hr/>
         </div>
     )
 

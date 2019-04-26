@@ -3,7 +3,7 @@ import Init from '../containers/Init'
 import Search from '../containers/Search';
 import Panel from '../containers/Panel';
 import Results from '../containers/Results';
-import Doc from '../containers/Doc';
+import Details from '../containers/Details';
 
 
 function App(){
@@ -13,6 +13,13 @@ function App(){
       <Search/>
       <Panel/>
       <Results/>
+      <Details/>
+    </div>
+  );
+}
+
+export default App;
+/* 
       <Doc order='0'/>
       <Doc order='1'/>
       <Doc order='2'/>
@@ -24,8 +31,4 @@ function App(){
       <Doc order='8'/>
       <Doc order='9'/>
       <Doc order='10'/>
-    </div>
-  );
-}
-
-export default App;
+*/

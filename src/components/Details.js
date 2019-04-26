@@ -1,11 +1,11 @@
 import React from 'react';
+import Doc from '../containers/Doc'
 
 class Details extends React.Component{
   
-  constructor(props){
-    super(props);
-
-  }
+  //constructor(props){
+  //  super(props);
+  //}
 
   //shouldComponentUpdate(){
   //    return this.props.ready;
@@ -16,11 +16,39 @@ class Details extends React.Component{
       return(null);
     } else {
       return(
-        this.props.details.map ((e,i) => (
-          <div>
-            <Doc source={e.details.source} id={e.details.id}/>
+        <div>
+
+        <button
+          type="button"
+          onClick={ () => {
+
+          }}> Previous Page</button>
+
+        <button
+          type="button"
+          onClick={ () => {
+
+          }}> Next Page </button>
+        <hr/>
+
+        {this.props.docs.map((e,i) => (
+          <div key={i}>            
+            <Doc order={i} key={i} />
           </div>
-        ))
+        ))}
+        <button
+          type="button"
+          onClick={ () => {
+
+          }}> Previous Page</button>
+
+        <button
+          type="button"
+          onClick={ () => {
+
+          }}> Next Page </button>
+          
+        </div>
       )
     }
   }

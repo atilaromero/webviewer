@@ -10,6 +10,8 @@ export const detail_cancel = payload => ({type:'detail_cancel', payload})
 
 export const ready_set = payload => ({type:'ready_set', payload})
 
+export const pageconf_set = payload => ({type:'pageconf_set', payload})
+
 export function getSources(){
     return function (dispatch) {
         return (async () => {

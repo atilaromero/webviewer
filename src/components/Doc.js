@@ -24,7 +24,7 @@ class Doc extends React.Component{
 
     const docs = this.props.docs;
     //const doc = docs.find(obj => (obj.details.source === src && obj.details.id === id))
-    //console.log(doc)
+    //console.log(this.props)
 
     console.log(`order:${order}, length:${docs.length}`)
    
@@ -40,8 +40,8 @@ class Doc extends React.Component{
       const doc = docs[order].details
       return (
         <div>
-          {'Source: '}{doc.source}
-          {' | ID: '}{doc.id}
+          {'Source: '}{doc.details.source}
+          {' | ID: '}{doc.details.id}
           {' | Nome: '}{doc.details.properties.nome}
           <hr/>
         </div>

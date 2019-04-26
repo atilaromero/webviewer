@@ -18,7 +18,18 @@ function Results (props) {
                             if(v.ids.length===0){
                                 alert('No search hits in this data source')
                             } else {
-                                let requests = v.ids.map((id,i) => {
+                                let pos = props.pageconf.currentposition
+                                let size = props.pageconf.pagesize
+                                const page = v.ids.slice(pos, pos + size)
+
+                                if(v.ids.length > pos + size)
+                                  pos = pos + size
+                                else
+                                  pos = -1
+
+                                console.log(page)
+
+                                let requests = page.map((id,i) => {
                                     
                                     return fetch(`http://localhost:8080/sources/${v.source}/docs/${id}`)
                                       .then(response => {
