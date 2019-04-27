@@ -77,6 +77,7 @@ function Results (props) {
                 </li>
             ))}
         </ul>
+        
         <button
           type="button"
           onClick={() => {
