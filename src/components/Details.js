@@ -28,6 +28,15 @@ class Details extends React.Component{
           type="button"
           onClick={ () => {
 
+            let pos = this.props.page.currentposition
+            let size = this.props.page.pagesize
+
+            let page = {
+                'currentposition': pos+size,
+                'pagesize': size,
+            }
+
+            this.props.setpage(page)
           }}> Next Page </button>
         <hr/>
 

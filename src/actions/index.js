@@ -24,6 +24,16 @@ export function getSources(){
     }
 }
 
+export function setPage(page = {'currentposition': 0, 'pagesize': 10}){
+    return function (dispatch) {
+        return (async () => {
+            console.log("setting page...");
+
+            return dispatch(pageconf_set(page));
+        })()
+    }
+}
+
 export function resetDetails(){
     return function (dispatch) {
         return (async () => {

@@ -18,8 +18,9 @@ function Results (props) {
                             if(v.ids.length===0){
                                 alert('No search hits in this data source')
                             } else {
-                                let pos = props.pageconf.currentposition
-                                let size = props.pageconf.pagesize
+                                props.resetdetails()
+                                let pos = props.page.currentposition
+                                let size = props.page.pagesize
                                 const page = v.ids.slice(pos, pos + size)
 
                                 if(v.ids.length > pos + size)
@@ -80,6 +81,7 @@ function Results (props) {
           type="button"
           onClick={() => {
               props.resetdetails()
+              props.setpage()
               props.goready(false)
           }}> Reset details</button>  
         <hr/>
@@ -91,6 +93,7 @@ Results.propTypes = {
     data: PropTypes.array.isRequired,
     details: PropTypes.func.isRequired,
     goready: PropTypes.func.isRequired,
+    setpage: PropTypes.func.isRequired,
 }
 
 export default Results
