@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Details from '../components/Details'
-import { setPage, resetDetails, getDetails, goReady } from '../actions';
+import { setPage, resetDetails, goReady } from '../actions';
 
 const mapStateToProps = function(state) {
     return {
@@ -14,7 +14,6 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = dispatch => ({
     setpage: (page) => setPage(page)(dispatch),
     resetdetails: () => resetDetails()(dispatch),
-    details: conf => getDetails(conf)(dispatch),
     goready: (ready) => goReady(ready)(dispatch),  
 })
 

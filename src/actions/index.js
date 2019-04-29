@@ -44,12 +44,21 @@ export function resetDetails(){
     }
 }
 
-export function getDetails(conf = {}){
-    return function (dispatch) {
+export function getDetails(source, page){
+    return function(dispatch){
         return (async () => {
-            console.log("getting details...");
-
-            return dispatch(detail_conf(conf));
+            const requests = page.map(async (id) => {
+                const response = await fetch(`http://localhost:8080/sources/${source}/docs/${id}`)
+                console.log(`http://localhost:8080/sources/${source}/docs/${id}`)
+                const result = await response.json()
+                const doc = {
+                    'details':result,
+                    'text':'',
+                    'content':'',
+                }
+                return dispatch(detail_receive(doc))
+            })
+            return Promise.all(requests)
         })()
     }
 }

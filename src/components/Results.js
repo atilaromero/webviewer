@@ -21,6 +21,7 @@ function Results (props) {
                         
                         props.setpage(page)
                         props.resetdetails()
+                        props.details(v.source, page)
                     }}> Select </button>
                 </li>
             ))}

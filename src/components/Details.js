@@ -36,59 +36,42 @@ class Details extends React.Component{
 
         console.log(page)
  
-        let requests = page.map((id,i) => {
-            
-            return fetch(`http://localhost:8080/sources/${v.source}/docs/${id}`)
-              .then(response => {
-                  console.log(`http://localhost:8080/sources/${v.source}/docs/${id}`)
-                  //console.log(response.json())
-                  return response.json()                                          
-              })
-              .then(result => {
-                const doc = {
-                    'details':result,
-                    'text':'',
-                    'content':'',
-                }
-                //props.details(doc)
-                return doc
-              })
-        })
+        this.props.details(v.source, page)
 
         //console.log(typeof(requests))
         //console.log(requests[0])
 
-        Promise.all(requests)
-          .then(responses => {
-            //console.log('responses')
-            //console.log(responses)
-            for(let response of responses){
-                //console.log(response)
-                const doc = {
-                    'details':response,
-                    'text':'',
-                    'content':'',
-                }
-                this.props.details(doc)
-            }
-            console.log(`requests done: ${responses.length} results`)
-            return responses
-          })
-          .then( responses => {
-              this.fetching = false
-              console.log(this.fetching)
-              this.props.goready(true)
-              return responses
-          })
-        return requests
+        // Promise.all(requests)
+        //   .then(responses => {
+        //     //console.log('responses')
+        //     //console.log(responses)
+        //     for(let response of responses){
+        //         //console.log(response)
+        //         const doc = {
+        //             'details':response,
+        //             'text':'',
+        //             'content':'',
+        //         }
+        //         this.props.details(doc)
+        //     }
+        //     console.log(`requests done: ${responses.length} results`)
+        //     return responses
+        //   })
+        //   .then( responses => {
+        //       this.fetching = false
+        //       console.log(this.fetching)
+        //       this.props.goready(true)
+        //       return responses
+        //   })
+        // return requests
     }
 
 }
 
-  shouldComponentUpdate(nextProps, nextState){
-    console.log('shouldComponentUpdate?')
-    return (!this.fetching)
-  }
+  // shouldComponentUpdate(nextProps, nextState){
+  //   console.log('shouldComponentUpdate?')
+  //   return (!this.fetching)
+  // }
 
   render(){
     console.log('rendering Details...')
@@ -97,7 +80,7 @@ class Details extends React.Component{
     } else {
       
       if(this.props.ready===false)
-        this.getdata()
+        // this.getdata()
 
       if(this.props.ready===true)
       return(
