@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "lodash": "^4.17.11",
     "node-fetch": "^2.3.0",
     "react": "^16.8.4",
     "react-devtools": "^3.6.1",

@@ -11,13 +11,98 @@ class Details extends React.Component{
   //    return this.props.ready;
   //}
 
+  fetching = false
+
+  getdata() {
+    let v = this.props.data.find(item => item.source === this.props.page.source)
+    console.log(v)
+
+    this.fetching = true
+
+    if(v.ids.length===0){
+        alert('No search hits in this data source')
+        this.fetching = false
+        return null
+    } else {
+        this.props.resetdetails()
+        let pos = this.props.page.currentposition
+        let size = this.props.page.pagesize
+        const page = v.ids.slice(pos, pos + size)
+
+        if(v.ids.length > pos + size)
+          pos = pos + size
+        else
+          pos = -1
+
+        console.log(page)
+ 
+        let requests = page.map((id,i) => {
+            
+            return fetch(`http://localhost:8080/sources/${v.source}/docs/${id}`)
+              .then(response => {
+                  console.log(`http://localhost:8080/sources/${v.source}/docs/${id}`)
+                  //console.log(response.json())
+                  return response.json()                                          
+              })
+              .then(result => {
+                const doc = {
+                    'details':result,
+                    'text':'',
+                    'content':'',
+                }
+                //props.details(doc)
+                return doc
+              })
+        })
+
+        //console.log(typeof(requests))
+        //console.log(requests[0])
+
+        Promise.all(requests)
+          .then(responses => {
+            //console.log('responses')
+            //console.log(responses)
+            for(let response of responses){
+                //console.log(response)
+                const doc = {
+                    'details':response,
+                    'text':'',
+                    'content':'',
+                }
+                this.props.details(doc)
+            }
+            console.log(`requests done: ${responses.length} results`)
+            return responses
+          })
+          .then( responses => {
+              this.fetching = false
+              console.log(this.fetching)
+              this.props.goready(true)
+              return responses
+          })
+        return requests
+    }
+
+}
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('shouldComponentUpdate?')
+    return (!this.fetching)
+  }
+
   render(){
-    if (this.props.ready === false) {
+    console.log('rendering Details...')
+    if (this.props.page.source === '') {
       return(null);
     } else {
+      
+      if(this.props.ready===false)
+        this.getdata()
+
+      if(this.props.ready===true)
       return(
         <div>
-
+        <h3>Source {this.props.page.source} - Results {this.props.page.currentposition + 1} to {this.props.page.currentposition + this.props.page.pagesize}</h3>
         <button
           type="button"
           onClick={ () => {
@@ -30,10 +115,12 @@ class Details extends React.Component{
 
             let pos = this.props.page.currentposition
             let size = this.props.page.pagesize
+            let source = this.props.page.source
 
             let page = {
                 'currentposition': pos+size,
                 'pagesize': size,
+                'source': source,
             }
 
             this.props.setpage(page)
@@ -59,6 +146,8 @@ class Details extends React.Component{
           
         </div>
       )
+      else
+        return null
     }
   }
 }

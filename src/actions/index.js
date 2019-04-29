@@ -24,7 +24,7 @@ export function getSources(){
     }
 }
 
-export function setPage(page = {'currentposition': 0, 'pagesize': 10}){
+export function setPage(page = {'currentposition': 0, 'pagesize': 10, 'source':''}){
     return function (dispatch) {
         return (async () => {
             console.log("setting page...");

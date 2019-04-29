@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {cloneDeep} from 'lodash'
 import PropTypes from 'prop-types'
 
 function Results (props) {
@@ -12,6 +12,42 @@ function Results (props) {
             {props.data.map((v,i) => (
                 <li key={i}>
                     {v.source} ({v.ids.length})
+
+                    <button type='button' onClick={ () => {
+                        let page = cloneDeep(props.page)
+                        
+                        page.currentposition = 0
+                        page.source = v.source
+                        
+                        props.setpage(page)
+                        props.resetdetails()
+                    }}> Select </button>
+                </li>
+            ))}
+        </ul>
+
+        <button
+          type="button"
+          onClick={() => {
+              props.resetdetails()
+              props.setpage()
+              props.goready(false)
+          }}> Reset details</button>  
+        <hr/>
+      </div>
+    )
+}
+
+Results.propTypes = {
+    data: PropTypes.array.isRequired,
+    details: PropTypes.func.isRequired,
+    goready: PropTypes.func.isRequired,
+    setpage: PropTypes.func.isRequired,
+}
+
+export default Results
+
+/*
                     <button 
                         type="button"
                         onClick={() => {
@@ -73,28 +109,4 @@ function Results (props) {
                                       return responses
                                   })
                             }
-                    }}>Details</button>
-                </li>
-            ))}
-        </ul>
-        
-        <button
-          type="button"
-          onClick={() => {
-              props.resetdetails()
-              props.setpage()
-              props.goready(false)
-          }}> Reset details</button>  
-        <hr/>
-      </div>
-    )
-}
-
-Results.propTypes = {
-    data: PropTypes.array.isRequired,
-    details: PropTypes.func.isRequired,
-    goready: PropTypes.func.isRequired,
-    setpage: PropTypes.func.isRequired,
-}
-
-export default Results
+                    }}>Details</button> */
