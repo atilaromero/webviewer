@@ -75,17 +75,30 @@ class Details extends React.Component{
 
   render(){
     console.log('rendering Details...')
+
+//    if (this.props.page.source === '') {
+//      return(null);
+//    } else {
+      
+      //if(this.props.ready===false)
+        // this.getdata()
+
+//      if(this.props.ready===true)
+//      return(
+//        <div>
+//        <h3>Source {this.props.page.source} - Results {this.props.page.currentposition + 1} to {this.props.page.currentposition + this.props.page.pagesize}</h3>
+//       </div>
+//      )
+     
     if (this.props.page.source === '') {
       return(null);
     } else {
       
-      if(this.props.ready===false)
-        // this.getdata()
-
       if(this.props.ready===true)
       return(
         <div>
         <h3>Source {this.props.page.source} - Results {this.props.page.currentposition + 1} to {this.props.page.currentposition + this.props.page.pagesize}</h3>
+  
         <button
           type="button"
           onClick={ () => {
@@ -129,8 +142,10 @@ class Details extends React.Component{
           
         </div>
       )
-      else
-        return null
+      else{
+        //console.log('null')
+        return null       
+      }
     }
   }
 }

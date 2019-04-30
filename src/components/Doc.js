@@ -11,7 +11,8 @@ class Doc extends React.Component{
 
   shouldComponentUpdate(nextProps, nextState){
     console.log(nextProps.ready)
-    return (nextProps.ready || this.props.ready)
+    //return (nextProps.ready || this.props.ready)
+    return true
   }
 
   render(){
@@ -40,9 +41,9 @@ class Doc extends React.Component{
       const doc = docs[order].details
       return (
         <div>
-          {'Source: '}{doc.details.source}
-          {' | ID: '}{doc.details.id}
-          {' | Nome: '}{doc.details.properties.nome}
+          {'Source: '}{doc.source}
+          {' | ID: '}{doc.id}
+          {' | Nome: '}{doc.properties.nome}
           <hr/>
         </div>
       );

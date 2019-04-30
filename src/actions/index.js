@@ -47,6 +47,7 @@ export function resetDetails(){
 export function getDetails(source, page){
     return function(dispatch){
         return (async () => {
+            console.log(page)
             const requests = page.map(async (id) => {
                 const response = await fetch(`http://localhost:8080/sources/${source}/docs/${id}`)
                 console.log(`http://localhost:8080/sources/${source}/docs/${id}`)
@@ -59,6 +60,10 @@ export function getDetails(source, page){
                 return dispatch(detail_receive(doc))
             })
             return Promise.all(requests)
+                    .then( results => {
+                        dispatch(ready_set(true))
+                        return results
+                    })
         })()
     }
 }

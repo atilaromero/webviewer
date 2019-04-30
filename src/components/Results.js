@@ -21,7 +21,12 @@ function Results (props) {
                         
                         props.setpage(page)
                         props.resetdetails()
-                        props.details(v.source, page)
+                        props.details(v.source, v.ids.slice(0, 10))
+                          .then(result => {
+                            //props.goready(true)
+                            return result
+                          })
+                        
                     }}> Select </button>
                 </li>
             ))}
