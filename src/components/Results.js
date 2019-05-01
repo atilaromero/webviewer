@@ -19,8 +19,8 @@ function Results (props) {
                         page.currentposition = 0
                         page.source = v.source
                         
-                        props.setpage(page)
                         props.resetdetails()
+                        props.setpage(page, v.ids)
                         props.details(v.source, v.ids.slice(0, 10))
                           .then(result => {
                             //props.goready(true)

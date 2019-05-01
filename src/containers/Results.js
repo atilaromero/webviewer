@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   details: (source, page) => getDetails(source, page)(dispatch),
   goready: (ready) => goReady(ready)(dispatch),
-  setpage: (page) => setPage(page)(dispatch),
+  setpage: (page, data) => setPage(page, data)(dispatch),
   resetdetails: () => resetDetails()(dispatch),
 })
 

@@ -103,23 +103,52 @@ class Details extends React.Component{
           type="button"
           onClick={ () => {
 
+            let pos = this.props.page.currentposition
+            let size = this.props.page.pagesize
+            let source = this.props.page.source
+
+            let nextpos = 0
+            if(pos > size)
+              nextpos = pos - size              
+
+            let page = {
+                'currentposition': nextpos,
+                'pagesize': size,
+                'source': source,
+            }
+            let sourceresults = this.props.data.find(item => item.source === this.props.page.source)
+            console.log(sourceresults)
+
+            this.props.setpage(page,sourceresults)
+            this.props.resetdetails()
+            this.props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
+
           }}> Previous Page</button>
 
         <button
           type="button"
           onClick={ () => {
 
+            let sourceresults = this.props.data.find(item => item.source === this.props.page.source)
+            console.log(sourceresults)
+
             let pos = this.props.page.currentposition
             let size = this.props.page.pagesize
             let source = this.props.page.source
 
+            let nextpos = pos + size
+            if( nextpos > sourceresults.ids.length)
+              nextpos = pos
+
             let page = {
-                'currentposition': pos+size,
+                'currentposition': nextpos,
                 'pagesize': size,
                 'source': source,
             }
 
-            this.props.setpage(page)
+            this.props.setpage(page,sourceresults)
+            this.props.resetdetails()
+            this.props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
           }}> Next Page </button>
         <hr/>
 

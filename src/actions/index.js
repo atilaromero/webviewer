@@ -24,11 +24,18 @@ export function getSources(){
     }
 }
 
-export function setPage(page = {'currentposition': 0, 'pagesize': 10, 'source':''}){
+export function setPage(page = {'currentposition': 0, 'pagesize': 10, 'source':''}, data = []){
     return function (dispatch) {
         return (async () => {
             console.log("setting page...");
 
+            // if(data.length === 0)
+            //     page = {'currentposition': 0, 'pagesize': 10, 'source':''}
+            // else {
+            //     console.log(data)
+            //     const slice = data.ids.slice(page.currentposition, page.currentposition + page.pagesize)
+            //     getDetails(page.source,slice)              
+            // }
             return dispatch(pageconf_set(page));
         })()
     }
