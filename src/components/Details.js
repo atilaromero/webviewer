@@ -118,7 +118,8 @@ class Details extends React.Component{
             }
             let sourceresults = this.props.data.find(item => item.source === this.props.page.source)
             console.log(sourceresults)
-
+            
+            this.props.goready(false)
             this.props.setpage(page,sourceresults)
             this.props.resetdetails()
             this.props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
@@ -146,6 +147,7 @@ class Details extends React.Component{
                 'source': source,
             }
 
+            this.props.goready(false)
             this.props.setpage(page,sourceresults)
             this.props.resetdetails()
             this.props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
@@ -166,7 +168,11 @@ class Details extends React.Component{
         <button
           type="button"
           onClick={ () => {
+            let a = fetch('http://localhost:8080', { headers: new Headers({ 'range': 'bytes=0-128'}) })
+            a.then( r => r.text())
+             .then( j => console.log(j)
 
+            )
           }}> Next Page </button>
           
         </div>

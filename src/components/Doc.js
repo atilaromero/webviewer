@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 class Doc extends React.Component{
 
-  //constructor(props){
+ //constructor(props){
   //  super(props);
   //  console.log('setting <DOC>...');
   //  console.log(props);
-  //}
+  //} 
 
   shouldComponentUpdate(nextProps, nextState){
     console.log(nextProps.ready)

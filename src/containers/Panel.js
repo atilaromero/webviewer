@@ -3,7 +3,8 @@ import Panel from '../components/Panel'
 import { getSources } from '../actions'
 
 const mapStateToProps = state => ({
-    sources: state.sources
+    sources: state.sources,
+    data: state.results,
 })
 
 const mapDispatchToProps = dispatch => ({

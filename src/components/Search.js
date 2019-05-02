@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 function Search(props) {
     const [query, setQuery] = useState("")
     
-//    props.getsources()
-
     return (<div>
         <hr/>
         <center>

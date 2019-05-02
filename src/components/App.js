@@ -9,7 +9,7 @@ import Details from '../containers/Details';
 function App(){
   return (
     <div>
-      <Init/>
+      
       <Search/>
       <Panel/>
       <Results/>
