@@ -13,6 +13,4 @@ it('renders without crashing', () => {
       <App/>
     </Provider>
   )
-  const button = component.root.findByType('button')
-  expect(button.props.children).toBe('Search')
 });

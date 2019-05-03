@@ -20,6 +20,5 @@ function Search(props) {
 }
 Search.propTypes = {
     search: PropTypes.func.isRequired,
-    getsources: PropTypes.func.isRequired,
 }
 export default Search

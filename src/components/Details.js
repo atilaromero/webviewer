@@ -1,218 +1,69 @@
 import React from 'react';
-import Doc from '../containers/Doc'
+import Doc from '../components/Doc'
 
-class Details extends React.Component{
-  
-  //constructor(props){
-  //  super(props);
-  //}
+function Details(props) {
+  return(
+    <div>
+    <h3>Source {props.page.source} - Results {props.page.currentposition + 1} to {props.page.currentposition + props.page.pagesize}</h3>
 
-  //shouldComponentUpdate(){
-  //    return this.props.ready;
-  //}
+    <button
+      type="button"
+      onClick={ () => {
 
-  fetching = false
+        let pos = props.page.currentposition
+        let size = props.page.pagesize
+        let source = props.page.source
 
-  getdata() {
-    let v = this.props.data.find(item => item.source === this.props.page.source)
-    console.log(v)
+        let nextpos = 0
+        if(pos > size)
+          nextpos = pos - size              
 
-    this.fetching = true
+        let page = {
+            'currentposition': nextpos,
+            'pagesize': size,
+            'source': source,
+        }
+        let sourceresults = props.data.find(item => item.source === props.page.source)
+        console.log(sourceresults)
+        
+        props.setpage(page,sourceresults)
+        props.resetdetails()
+        props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
 
-    if(v.ids.length===0){
-        alert('No search hits in this data source')
-        this.fetching = false
-        return null
-    } else {
-        this.props.resetdetails()
-        let pos = this.props.page.currentposition
-        let size = this.props.page.pagesize
-        const page = v.ids.slice(pos, pos + size)
+      }}> Previous Page</button>
 
-        if(v.ids.length > pos + size)
-          pos = pos + size
-        else
-          pos = -1
+    <button
+      type="button"
+      onClick={ () => {
 
-        console.log(page)
- 
-        this.props.details(v.source, page)
+        let sourceresults = props.data.find(item => item.source === props.page.source)
+        console.log({sourceresults})
 
-        //console.log(typeof(requests))
-        //console.log(requests[0])
+        let pos = props.page.currentposition
+        let size = props.page.pagesize
+        let source = props.page.source
 
-        // Promise.all(requests)
-        //   .then(responses => {
-        //     //console.log('responses')
-        //     //console.log(responses)
-        //     for(let response of responses){
-        //         //console.log(response)
-        //         const doc = {
-        //             'details':response,
-        //             'text':'',
-        //             'content':'',
-        //         }
-        //         this.props.details(doc)
-        //     }
-        //     console.log(`requests done: ${responses.length} results`)
-        //     return responses
-        //   })
-        //   .then( responses => {
-        //       this.fetching = false
-        //       console.log(this.fetching)
-        //       this.props.goready(true)
-        //       return responses
-        //   })
-        // return requests
-    }
+        let nextpos = pos + size
+        if( nextpos > sourceresults.ids.length)
+          nextpos = pos
 
-}
+        let page = {
+            'currentposition': nextpos,
+            'pagesize': size,
+            'source': source,
+        }
 
-  // shouldComponentUpdate(nextProps, nextState){
-  //   console.log('shouldComponentUpdate?')
-  //   return (!this.fetching)
-  // }
+        props.setpage(page,sourceresults)
+        props.resetdetails()
+        props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
+      }}> Next Page </button>
+    <hr/>
 
-  render(){
-    console.log('rendering Details...')
-
-//    if (this.props.page.source === '') {
-//      return(null);
-//    } else {
-      
-      //if(this.props.ready===false)
-        // this.getdata()
-
-//      if(this.props.ready===true)
-//      return(
-//        <div>
-//        <h3>Source {this.props.page.source} - Results {this.props.page.currentposition + 1} to {this.props.page.currentposition + this.props.page.pagesize}</h3>
-//       </div>
-//      )
-     
-    if (this.props.page.source === '') {
-      return(null);
-    } else {
-      
-      if(this.props.ready===true)
-      return(
-        <div>
-        <h3>Source {this.props.page.source} - Results {this.props.page.currentposition + 1} to {this.props.page.currentposition + this.props.page.pagesize}</h3>
-  
-        <button
-          type="button"
-          onClick={ () => {
-
-            let pos = this.props.page.currentposition
-            let size = this.props.page.pagesize
-            let source = this.props.page.source
-
-            let nextpos = 0
-            if(pos > size)
-              nextpos = pos - size              
-
-            let page = {
-                'currentposition': nextpos,
-                'pagesize': size,
-                'source': source,
-            }
-            let sourceresults = this.props.data.find(item => item.source === this.props.page.source)
-            console.log(sourceresults)
-            
-            this.props.goready(false)
-            this.props.setpage(page,sourceresults)
-            this.props.resetdetails()
-            this.props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
-
-          }}> Previous Page</button>
-
-        <button
-          type="button"
-          onClick={ () => {
-
-            let sourceresults = this.props.data.find(item => item.source === this.props.page.source)
-            console.log(sourceresults)
-
-            let pos = this.props.page.currentposition
-            let size = this.props.page.pagesize
-            let source = this.props.page.source
-
-            let nextpos = pos + size
-            if( nextpos > sourceresults.ids.length)
-              nextpos = pos
-
-            let page = {
-                'currentposition': nextpos,
-                'pagesize': size,
-                'source': source,
-            }
-
-            this.props.goready(false)
-            this.props.setpage(page,sourceresults)
-            this.props.resetdetails()
-            this.props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
-          }}> Next Page </button>
-        <hr/>
-
-        {this.props.docs.map((e,i) => (
-          <div key={i}>            
-            <Doc order={i} key={i} />
-          </div>
-        ))}
-        <button
-          type="button"
-          onClick={ () => {
-
-          }}> Previous Page</button>
-
-        <button
-          type="button"
-          onClick={ () => {
-            let a = fetch('http://localhost:8080', { headers: new Headers({ 'range': 'bytes=0-128'}) })
-            a.then( r => r.text())
-             .then( j => console.log(j)
-
-            )
-          }}> Next Page </button>
-          
-        </div>
-      )
-      else{
-        //console.log('null')
-        return null       
-      }
-    }
-  }
+    {props.docs.map((doc,i) => (
+      <Doc doc={doc} key={i} />
+    ))}
+    </div>
+  )
 }
 
 export default Details;
-
-/*
-import React from 'react'
-
-import PropTypes from 'prop-types'
-
-function Results (props) {
-    return (
-        <ul>
-            {props.data.map((v,i) => (
-                <li key={i}>
-                    {v.source}
-                    <ul>
-                        {v.ids.map((vi,i) => (
-                            <li key={i}><a href={"http://localhost:8080/sources/" + v.source + "/docs/" + vi + "/text"}>{vi}</a></li>
-                        ))}
-                    </ul>
-                </li>
-            ))}
-        </ul>
-    )
-}
-
-Results.propTypes = {
-    data: PropTypes.array.isRequired,
-}
-
-export default Results
-
-*/
