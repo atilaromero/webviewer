@@ -1,4 +1,8 @@
-import { pageconf_set } from '../actions'
+import {
+    pageconf_set_pos,
+    pageconf_set_size,
+    pageconf_set_source,
+} from '../actions'
 
 const pageconf = (state = {
     'currentposition':0,
@@ -6,8 +10,12 @@ const pageconf = (state = {
     'source':''
     }, action) => {
     switch (action.type){
-        case pageconf_set.name:
-            return action.payload
+        case pageconf_set_pos.name:
+            return {...state, currentposition: action.payload}
+        case pageconf_set_size.name:
+            return {...state, pagesize: action.payload}
+        case pageconf_set_source.name:
+            return {...state, source: action.payload}
         default:
             return state
 

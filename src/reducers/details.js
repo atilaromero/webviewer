@@ -1,14 +1,57 @@
 import { 
+    detail_request,
     detail_receive,
-    detail_reset,
+    detail_cancel,
 } from '../actions'
 
-const details = (state = [], action) => {
-    switch (action.type) {
-        case detail_reset.name:
-            return []
-        case detail_receive.name:
-            return [...state, action.payload]
+const details = (state = {}, {type, payload}) => {
+    switch (type) {
+        case detail_request.name: {
+            const { source, id } = payload
+            const ids = source in state ? state[source] : {}
+            const iddata = id in ids ? ids[id] : {}
+            return {
+                ...state,
+                [source]:{
+                    ...ids,
+                    [id]: {
+                        ...iddata,
+                        isFetching: true,
+                    },
+                },
+            }
+        }
+        case detail_receive.name: {
+            const {source, id, data} = payload
+            const ids = source in state ? state[source] : {}
+            const iddata = id in ids ? ids[id] : {}
+            return {
+                ...state,
+                [source]:{
+                    ...ids,
+                    [id]: {
+                        ...iddata,
+                        isFetching: false,
+                        details: data,
+                    },
+                },
+            }
+        }
+        case detail_cancel.name: {
+            const {source, id} = payload
+            const ids = source in state ? state[source] : {}
+            const iddata = id in ids ? ids[id] : {}
+            return {
+                ...state,
+                [source]:{
+                    ...ids,
+                    [id]: {
+                        ...iddata,
+                        isFetching: false,
+                    },
+                },
+            }
+        }
         default:
             return state
     }

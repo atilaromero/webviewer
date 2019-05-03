@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 function Doc(props){
   return (
     <div>
-      {'Source: '}{props.doc.details.source}
-      {' | ID: '}{props.doc.details.id}
-      {' | Nome: '}{props.doc.details.properties.nome}
+      {'Source: '}{props.doc.source}
+      {' | ID: '}{props.doc.id}
+      {' | Nome: '}{props.doc.details? props.doc.details.properties.nome:''}
       <hr/>
     </div>
   );

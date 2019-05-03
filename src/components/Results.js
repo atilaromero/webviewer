@@ -1,5 +1,4 @@
 import React from 'react'
-import {cloneDeep} from 'lodash'
 import PropTypes from 'prop-types'
 
 function Results (props) {
@@ -14,29 +13,13 @@ function Results (props) {
                     {v.source} ({v.ids.length})
 
                     <button type='button' onClick={ () => {
-                        let page = cloneDeep(props.page)
-                        
-                        page.currentposition = 0
-                        page.source = v.source
-                        
-                        props.resetdetails()
-                        props.setpage(page, v.ids)
-                        props.details(v.source, v.ids.slice(0, 10))
-                          .then(result => {
-                            return result
-                          })
-                        
+                        console.log(1234123)
+                        props.pageSetSource(v.source)
                     }}> Select </button>
                 </li>
             ))}
         </ul>
 
-        <button
-          type="button"
-          onClick={() => {
-              props.resetdetails()
-              props.setpage()
-          }}> Reset details</button>  
         <hr/>
       </div>
     )
@@ -44,8 +27,7 @@ function Results (props) {
 
 Results.propTypes = {
     data: PropTypes.array.isRequired,
-    details: PropTypes.func.isRequired,
-    setpage: PropTypes.func.isRequired,
+    pageSetSource: PropTypes.func.isRequired,
 }
 
 export default Results

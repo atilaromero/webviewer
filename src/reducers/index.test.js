@@ -8,7 +8,7 @@ it('initial state', () => {
         applyMiddleware(thunk)
     )
     const expected = {
-        details: [], 
+        details: {}, 
         results: [],
         pageconf: {
             currentposition:0,
@@ -16,7 +16,6 @@ it('initial state', () => {
             source:"",
         },
         sources: [],
-        ready: false,
     }
     expect(store.getState()).toEqual(expected)
 })

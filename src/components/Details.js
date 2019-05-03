@@ -8,58 +8,14 @@ function Details(props) {
 
     <button
       type="button"
-      onClick={ () => {
-
-        let pos = props.page.currentposition
-        let size = props.page.pagesize
-        let source = props.page.source
-
-        let nextpos = 0
-        if(pos > size)
-          nextpos = pos - size              
-
-        let page = {
-            'currentposition': nextpos,
-            'pagesize': size,
-            'source': source,
-        }
-        let sourceresults = props.data.find(item => item.source === props.page.source)
-        console.log(sourceresults)
-        
-        props.setpage(page,sourceresults)
-        props.resetdetails()
-        props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
-
-      }}> Previous Page</button>
+      onClick={null}> Previous Page</button>
 
     <button
       type="button"
-      onClick={ () => {
-
-        let sourceresults = props.data.find(item => item.source === props.page.source)
-        console.log({sourceresults})
-
-        let pos = props.page.currentposition
-        let size = props.page.pagesize
-        let source = props.page.source
-
-        let nextpos = pos + size
-        if( nextpos > sourceresults.ids.length)
-          nextpos = pos
-
-        let page = {
-            'currentposition': nextpos,
-            'pagesize': size,
-            'source': source,
-        }
-
-        props.setpage(page,sourceresults)
-        props.resetdetails()
-        props.details(source,sourceresults.ids.slice(page.currentposition, page.currentposition + page.pagesize))
-      }}> Next Page </button>
+      onClick={null}> Next Page </button>
     <hr/>
 
-    {props.docs.map((doc,i) => (
+    {props.currentDocs.map((doc,i) => (
       <Doc doc={doc} key={i} />
     ))}
     </div>
