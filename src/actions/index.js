@@ -65,14 +65,14 @@ export function searchDocument (query) {
 export function fetchDocument ({source, id}) {
     return function (dispatch) {
         return (async () => {
-            console.log({source,id})
             await dispatch(detail_request({source, id}))
             const response = await fetch(`http://localhost:8080/sources/${source}/docs/${id}`)
             const json = await response.json()
             return dispatch(detail_receive({source, id, data: json}))
         })()
-        .catch(error => {
-            return dispatch(detail_cancel({source, id, error}))
+        .catch(async error => {
+            await dispatch(detail_cancel({source, id, error}))
+            throw error
         })
     }
 }

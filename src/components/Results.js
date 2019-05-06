@@ -13,7 +13,6 @@ function Results (props) {
                     {v.source} ({v.ids.length})
 
                     <button type='button' onClick={ () => {
-                        console.log(1234123)
                         props.pageSetSource(v.source)
                     }}> Select </button>
                 </li>
