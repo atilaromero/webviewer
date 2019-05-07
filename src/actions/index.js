@@ -13,19 +13,19 @@ export const pageconf_set_pos = payload => ({type:'pageconf_set_pos', payload})
 export const pageconf_set_size = payload => ({type:'pageconf_set_size', payload})
 export const pageconf_set_source = payload => ({type:'pageconf_set_source', payload})
 
-export const pageSetPos = pos => dispatch => (async() => {
+export const pageSetPos = pos => async (dispatch) => {
     dispatch(pageconf_set_pos(pos))
-    dispatch(updateDetails())
-})
+    await dispatch(updateDetails())
+}
 
-export const pageSetSize = size => dispatch => (async() => {
+export const pageSetSize = size => async (dispatch) => {
     dispatch(pageconf_set_size(size))
-    dispatch(updateDetails())
-})
+    await dispatch(updateDetails())
+}
 
-export const pageSetSource = (source) => (dispatch) => {
+export const pageSetSource = (source) => async (dispatch) => {
     dispatch(pageconf_set_source(source))
-    dispatch(updateDetails())
+    await dispatch(updateDetails())
 }
 
 export function getSources(){
@@ -39,12 +39,10 @@ export function getSources(){
 }
 
 export function updateDetails(){
-    console.log(88888)
     return function(dispatch, getState){
         const state = getState()
         const docs = selectCurrentDocs(state)
         const requests = docs.map(async (doc) => {
-            console.log({docs})
             const {source, id} = doc
             return dispatch(fetchDocument({source, id}))
         })
