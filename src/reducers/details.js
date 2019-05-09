@@ -16,6 +16,8 @@ const details = (state = {}, {type, payload}) => {
                     ...ids,
                     [id]: {
                         ...iddata,
+                        source,
+                        id,
                         isFetching: true,
                     },
                 },
@@ -31,6 +33,8 @@ const details = (state = {}, {type, payload}) => {
                     ...ids,
                     [id]: {
                         ...iddata,
+                        source,
+                        id,
                         isFetching: false,
                         details: data,
                     },
@@ -47,6 +51,8 @@ const details = (state = {}, {type, payload}) => {
                     ...ids,
                     [id]: {
                         ...iddata,
+                        source,
+                        id,
                         isFetching: false,
                     },
                 },

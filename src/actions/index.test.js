@@ -14,6 +14,8 @@ it('fetchDocument', () => {
     const expected = {
         details: {A: {1:
             {
+                source: "A",
+                id: 1,
                 isFetching: false,
                 details: docA1,
             },
@@ -86,10 +88,14 @@ it('set source', async () => {
         details: {
             A: {
                 116:{
+                    source: "A",
+                    id: 116,
                     details: docA116,
                     isFetching: false,
                 },
                 196:{
+                    source: "A",
+                    id: 196,
                     details: docA196,
                     isFetching: false,
                 },
@@ -122,8 +128,18 @@ it('bogus updateDetails', async () => {
     const expected = {
         details: {
             A: {
-                116:{isFetching: true,},
-                196:{isFetching: true,},
+                116:{
+                    source: "A",
+                    id: 116,
+                    details: docA116,
+                    isFetching: false,
+                },
+                196:{
+                    source: "A",
+                    id: 196,
+                    details: docA196,
+                    isFetching: false,
+                },
             },
         },
         results: [
