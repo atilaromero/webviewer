@@ -7,10 +7,10 @@ export const selectCurrentDocs = state => {
     const sliced = filtered.ids.slice(currentposition, currentposition + pagesize)
     return sliced.map((id) => {
         if (!(source in state.details)){
-            return {source, id}
+            return {source, id, isFetching: false}
         }
         if (!(id in state.details[source])){
-            return {source, id}
+            return {source, id, isFetching: false}
         }
         return state.details[source][id]
     })
