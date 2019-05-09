@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Results (props) {
-    const line = (props.data.length===0) ? '' : 'Search hits on each source:'
+function Results ({data, pageSetSource}) {
+    const line = (data.length===0) ? '' : 'Search hits on each source:'
 
     return (
       <div >
         <ul>
             {line}
-            {props.data.map((v,i) => (
+            {data.map((v,i) => (
                 <li key={i}>
                     {v.source} ({v.ids.length})
 
                     <button type='button' onClick={ () => {
-                        props.pageSetSource(v.source)
+                        pageSetSource(v.source)
                     }}> Select </button>
                 </li>
             ))}

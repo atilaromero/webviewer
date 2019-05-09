@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Panel(props){    
+function Panel({sources}){    
     return (
         <div id="panel">
         <ul>
         <b>Sources:</b>
-            {props.sources.map((s,i) => (
+            {sources.map((s,i) => (
                 <li key={i} id={s.id}>
                     {i+1} - {s.id}
                 </li>

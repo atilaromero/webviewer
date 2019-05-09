@@ -1,20 +1,20 @@
+
 import { connect } from 'react-redux'
-import Details from '../components/Details'
-import { setPage, getDetails } from '../actions'
-import { selectCurrentDocs } from '../selectors'
+import { selectDocsInPage } from '../selectors'
+import { pageNext, pagePrev } from '../actions'
+import { Details } from '../components/Details'
 
 const mapStateToProps = state => ({
-      ready: state.ready,
-      docs: state.details,
-      page: state.pageconf,
-      data: state.results, 
-      currentDocs: selectCurrentDocs(state),
+  page: state.pageconf,
+  currentDocs: selectDocsInPage(state),
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
+    nextPage: () => dispatch(pageNext()),
+    prevPage: () => dispatch(pagePrev())
 })
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Details)

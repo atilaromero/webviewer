@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-function Search(props) {
+function Search({search}) {
     const [query, setQuery] = useState("")
     
     return (<div>
@@ -13,7 +13,7 @@ function Search(props) {
             onChange={event => setQuery(event.target.value)}></input>
         <button 
             type="button"
-            onClick={() => props.search(query)}>Search</button>
+            onClick={() => search(query)}>Search</button>
         </center>
         <hr/>
     </div>)

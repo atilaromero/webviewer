@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-function Doc(props){
+function Doc({doc}){
   return (
     <div>
-      {'Source: '}{props.doc.source}
-      {' | ID: '}{props.doc.id}
-      {' | Nome: '}{props.doc.details? props.doc.details.properties.nome:''}
+      {'Source: '}{doc.source}
+      {' | ID: '}{doc.id}
+      {' | Nome: '}{doc.details? doc.details.properties.nome:''}
       <hr/>
     </div>
   );
@@ -14,7 +14,11 @@ function Doc(props){
 
 
 Doc.propTypes = {
-  doc: PropTypes.object.isRequired,
+  doc: PropTypes.shape({
+    source: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    details: PropTypes.object,
+  }).isRequired,
 }
 
 export default Doc;

@@ -42,7 +42,7 @@ switch (url) {
       ]
     }),
   }
-  case 'http://localhost:8080/search?q=15docs':
+  case 'http://localhost:8080/search?q=sources':
   return {
     ok: true,
     json: () => ({

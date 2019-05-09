@@ -15,7 +15,7 @@ const pageconf = (state = {
         case pageconf_set_size.name:
             return {...state, pagesize: action.payload}
         case pageconf_set_source.name:
-            return {...state, source: action.payload}
+            return {...state, source: action.payload, currentposition:0}
         default:
             return state
 

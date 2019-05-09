@@ -1,12 +1,21 @@
+import {docA1, docA116, docA196} from '../test/mock'
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from '../reducers'
 import thunk from 'redux-thunk'
 
-import { result_set, fetchDocument, pageconf_set_source, searchDocument, pageSetSource, updateDetails} from '../actions'
+import { 
+    result_set,
+    fetchDocument,
+    searchDocument,
+    pageSetSource,
+    updateDetails,
+    pageNext,
+    pagePrev,
+} from '../actions'
 
-import {docA1, docA116, docA196} from '../test/mock'
+import { selectDocsInSource } from '../selectors';
 
-it('fetchDocument', () => {
+test('fetchDocument', () => {
     const store = createStore(
         rootReducer,
         applyMiddleware(thunk)
@@ -35,7 +44,7 @@ it('fetchDocument', () => {
         })
 })
 
-it('init store', () => {
+test('init store', () => {
     const store = createStore(
         rootReducer,
         applyMiddleware(thunk)
@@ -53,7 +62,7 @@ it('init store', () => {
     expect(store.getState()).toEqual(expected)
 })
 
-it('search', async () => {
+test('search', async () => {
     const store = createStore(
         rootReducer,
         applyMiddleware(thunk)
@@ -77,7 +86,7 @@ it('search', async () => {
     expect(store.getState()).toEqual(expected)
 })
 
-it('set source', async () => {
+test('set source', async () => {
     const store = createStore(
         rootReducer,
         applyMiddleware(thunk)
@@ -117,7 +126,7 @@ it('set source', async () => {
     expect(store.getState()).toEqual(expected)
 })
 
-it('bogus updateDetails', async () => {
+test('bogus updateDetails', async () => {
     const store = createStore(
         rootReducer,
         applyMiddleware(thunk)
@@ -156,4 +165,70 @@ it('bogus updateDetails', async () => {
         sources: [],
     }
     expect(store.getState()).toEqual(expected)
+})
+
+
+test('failed fetch', async () => {
+    const store = createStore(
+        rootReducer,
+        applyMiddleware(thunk)
+    )
+    await store.dispatch(searchDocument("fail"))
+    try{
+        await store.dispatch(pageSetSource("A"))
+        await store.dispatch(updateDetails())
+        expect(failed).toEqual(true)
+    } catch (e) {
+        expect(String(e)).toEqual('TypeError: response.json is not a function')
+        const state  = store.getState()
+        expect(state.details.A[0]).toEqual({
+            source: "A",
+            id: 0,
+            isFetching: false,
+            details: undefined,
+        })
+    }
+})
+
+test('pagination', async () => {
+    const store = createStore(
+        rootReducer,
+        applyMiddleware(thunk)
+    )
+    await store.dispatch(searchDocument("15docs"))
+    await store.dispatch(pageSetSource("B"))
+    await store.dispatch(pageNext())
+    let state = store.getState()
+    expect(state.pageconf.currentposition).toEqual(10)
+    await store.dispatch(pageNext())
+    state = store.getState()
+    expect(state.pageconf.currentposition).toEqual(10)
+    await store.dispatch(pagePrev())
+    state = store.getState()
+    expect(state.pageconf.currentposition).toEqual(0)
+    await store.dispatch(pagePrev())
+    state = store.getState()
+    expect(state.pageconf.currentposition).toEqual(0)
+})
+
+test('change source', async () => {
+    const store = createStore(
+        rootReducer,
+        applyMiddleware(thunk)
+    )
+    await store.dispatch(searchDocument("sources"))
+    await store.dispatch(pageSetSource("B"))
+    await store.dispatch(pageNext())
+    let state = store.getState()
+    expect(state.pageconf.currentposition).toEqual(10)
+    await store.dispatch(pageNext())
+    state = store.getState()
+    expect(state.pageconf.currentposition).toEqual(10)
+    await store.dispatch(pageSetSource("A"))
+    state = store.getState()
+    expect(state.pageconf.currentposition).toEqual(0)
+    const results = selectDocsInSource(store.getState())
+    expect(results.length).toEqual(3)
+    expect(state.pageconf.currentposition).toEqual(0)
+    expect(state.pageconf.pagesize).toEqual(10)
 })
