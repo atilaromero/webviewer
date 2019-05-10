@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import Doc from './Doc'
 
-export function Details({page, currentDocs, nextPage, prevPage}) {
+export function Details({page, currentDocs, nextPage, prevPage, getPreview}) {
   const first = currentDocs.length? page.currentposition + 1 : 0
   const last = currentDocs.length + page.currentposition
   return(
@@ -19,7 +19,7 @@ export function Details({page, currentDocs, nextPage, prevPage}) {
     <hr/>
 
     {currentDocs.map((doc,i) => (
-      <Doc doc={doc} key={i} />
+      <Doc doc={doc} getPreview={getPreview} key={i} />
     ))}
     </div>
   )
@@ -29,4 +29,5 @@ Details.prototype = PropTypes.exact({
     currentDocs: PropTypes.array.isRequired,
     nextPage: PropTypes.func.isRequired,
     prevPage: PropTypes.func.isRequired,
+    getPreview: PropTypes.func.isRequired,
 })

@@ -2,6 +2,7 @@ import {
     detail_request,
     detail_receive,
     detail_cancel,
+    preview_receive,
 } from '../actions'
 
 const details = (state = {}, {type, payload}) => {
@@ -37,6 +38,23 @@ const details = (state = {}, {type, payload}) => {
                         id,
                         isFetching: false,
                         details: data,
+                    },
+                },
+            }
+        }
+        case preview_receive.name: {
+            const {source, id, text} = payload
+            const ids = source in state ? state[source] : {}
+            const iddata = id in ids ? ids[id] : {}
+            return {
+                ...state,
+                [source]:{
+                    ...ids,
+                    [id]: {
+                        ...iddata,
+                        source,
+                        id,
+                        preview: text,
                     },
                 },
             }

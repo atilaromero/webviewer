@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux'
 import { selectDocsInPage } from '../selectors'
-import { pageNext, pagePrev } from '../actions'
+import { pageNext, pagePrev, preview } from '../actions'
 import { Details } from '../components/Details'
 
 const mapStateToProps = state => ({
@@ -11,7 +11,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
     nextPage: () => dispatch(pageNext()),
-    prevPage: () => dispatch(pagePrev())
+    prevPage: () => dispatch(pagePrev()),
+    getPreview: (source, id) => dispatch(preview(source,id)),
 })
 
 export default connect(
